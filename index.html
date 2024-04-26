@@ -173,8 +173,8 @@ fetch("https://ramdane-search-jurist3.hf.space/run/predict", {
           let data = r.data;
 ; // Declare response outside the try-catch block
 console.log(data[0]);
-apiHistory.push({ role: "user", parts:" اعتمد على هدا الاجتهاد في الاجابة على الاسئلةمع دكر رقمه وتاريخه في حالة الاعتماد عليه"+ data[0] });
-apiHistory.push({ role: "model", parts:" حسنا" });
+apiHistory.push({ role: "user", parts:{[text:" اعتمد على هدا الاجتهاد في الاجابة على الاسئلةمع دكر رقمه وتاريخه في حالة الاعتماد عليه"+ data[0] ]]}});
+apiHistory.push({ role: "model", parts:{[text:" حسنا"]} });
 let result; // Declare result outside the try-catch block
 let response
 console.log(apiHistory)
@@ -187,7 +187,7 @@ const chat = model.startChat({
       
       uiHistory.push({ role: "user", parts: [userQuery] }); // Add to UI history
 
-      apiHistory.push({ role: "user", parts:[userQuery] });
+      apiHistory.push({ role: "user", parts:{[text:[userQuery] ]}});
 
 let reft = database.ref('chatboot');
 reft.push({user:[userQuery]})
@@ -195,7 +195,7 @@ chat.sendMessage(userQuery).then((result) => {
   // Do something with the response
 response = result.response;
   
- apiHistory.push({ role: "model", parts: [response.text()] }); // Add to API history
+ apiHistory.push({ role: "model", parts:{[text: [response.text()]]} }); // Add to API history
       uiHistory.push({ role: "model", parts: [response.text()] }); // Add to UI history (formatted)
 
       updateChatHistory(); // Update chat history on screen
@@ -206,8 +206,9 @@ setTimeout(() => {
         .then((result) => {
           response = result.response;
   
- apiHistory.push({ role: "model", parts: [response.text()] }); // Add to API history
+ apiHistory.push({ role: "model", parts:{[text: [response.text()]]} }); // Add to API history
       uiHistory.push({ role: "model", parts: [response.text()] }); // Add to UI history (formatted)
+
 
       updateChatHistory(); // Update chat history on screen
       document.getElementById("myInput").value = "";
