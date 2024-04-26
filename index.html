@@ -158,8 +158,8 @@ fetch("https://ramdane-search-jurist3.hf.space/run/predict", {
           let data = r.data;
 ; // Declare response outside the try-catch block
 console.log(data[0]);
-apiHistory.push({ role: "user", parts:"    اعتمد على هدا الاجتهاد في الاجابة على الاسئلةمع دكر رقمه وتاريخه في حالة الاعتماد عليه"+ data[0] });
-apiHistory.push({ role: "model", parts:" حسنا" });
+apiHistory.push({ role: "user", parts:[{text:"    اعتمد على هدا الاجتهاد في الاجابة على الاسئلةمع دكر رقمه وتاريخه في حالة الاعتماد عليه"+ data[0] }]});
+apiHistory.push({ role: "model", parts:[{text:" حسنا" }]});
 
 fetch("https://ramdane-search-jurist3.hf.space/run/predict", {
         method: "POST",
